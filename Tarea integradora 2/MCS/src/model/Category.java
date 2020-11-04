@@ -1,5 +1,0 @@
-package model;
-
-enum Category{
-	NEWBIE, LITTLE_CONTRIBUITOR, MILD_CONTRIBUITOR, STAR_CONTRIBUITOR;
-}
