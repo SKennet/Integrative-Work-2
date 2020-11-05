@@ -2,13 +2,20 @@ package model;
 
 public class Song{
 	String title, artistName;
-	int duration;
+	int minutes, seconds;
 	Genres songGenre;
+	String [] duration = new String [2];
 	
-	public Song(String title, String artistName, int duration, int genreNum){
+	public Song(String title, String artistName, String duration, int genreNum){
 		this.title = title;
 		this.artistName = artistName;
 		this.duration = duration;
+		
+		this.duration = splitDuration(duration); //This will call the method "splitDuration".
+		this.minutes = Integer.parseInt(duration[0]);
+		this.seconds = Integer.parseInt(duration[1]);
+		
+		
 		
 		switch(genreNum){
 			case 1:	songGenre = Genres.ROCK;
@@ -24,6 +31,12 @@ public class Song{
 			case 6: songGenre = Genres.METAL;
 					break;
 		}
+	}
+	
+	//This separates the duration in minutes and seconds.
+	public String [] splitDuration(String duration){
+		String [] durationParts = string.split(":");
+		return durationParts;
 	}
 	
 	//This will display the song information.
