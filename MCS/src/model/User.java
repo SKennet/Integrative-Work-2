@@ -19,7 +19,7 @@ public class User{
 		String msg = "";
 		
 		msg += "*************  User **************" + "\n";
-		msg += "** UserName: " +  + "\n";
+		msg += "** UserName: "+ nickName + "\n";
 		msg += "Age: " + age +"\n";
 		msg += "Category: " + userCategory+ "\n";
 		msg += "***********************************" + "\n";
@@ -28,8 +28,9 @@ public class User{
 	}
 	
 	//This will create the new song.
-	public Song addSong(String title, String artist, int duration, Genre genre){
-		Song newSong = Song(title, artist, duration, genre);
+	public Song addSong(String title, String artist, String duration, int genre){
+		
+		Song newSong = new Song(title, artist, duration, genre);
 
 		songsDonated++; //This will count how many songs has donated the user.
 

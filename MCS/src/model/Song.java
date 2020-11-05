@@ -2,20 +2,21 @@ package model;
 
 public class Song{
 	String title, artistName;
-	int minutes, seconds;
+	int genreNum, minutes, seconds, totalDuration;
 	Genres songGenre;
 	String [] duration = new String [2];
+	
 	
 	public Song(String title, String artistName, String duration, int genreNum){
 		this.title = title;
 		this.artistName = artistName;
-		this.duration = duration;
+		this.genreNum = genreNum;
 		
 		this.duration = splitDuration(duration); //This will call the method "splitDuration".
 		this.minutes = Integer.parseInt(duration[0]);
 		this.seconds = Integer.parseInt(duration[1]);
 		
-		
+		calculateTotalDuration();
 		
 		switch(genreNum){
 			case 1:	songGenre = Genres.ROCK;
@@ -33,9 +34,14 @@ public class Song{
 		}
 	}
 	
+	public int calculateTotalDuration(){
+		totalDuration = (minutes*60) + (seconds);
+		return totalDuration;
+	}
+	
 	//This separates the duration in minutes and seconds.
 	public String [] splitDuration(String duration){
-		String [] durationParts = string.split(":");
+		String [] durationParts = String.split(":");
 		return durationParts;
 	}
 	
@@ -48,7 +54,7 @@ public class Song{
 		msg +=  "**  Artist: " + artistName + "\n";
 		msg +=	"**  Duration: " + duration + "\n";
 		msg +=	"Genre: " + songGenre + "\n";
-		msg +=  "***********************************"
+		msg +=  "***********************************";
 		
 		return msg;
 	}
@@ -61,7 +67,13 @@ public class Song{
 		return artistName;
 	}
 	public int getDuration(){
-		return duration;
+		return totalDuration;
+	}
+	public int getGenreNum(){
+		return genreNum;
+	}
+	public Genre getGenre(){
+		return songGenre;
 	}
 	
 	///This are the setters.
@@ -72,7 +84,13 @@ public class Song{
 		this.artistName = newArtistName;
 	}
 	public void setDuration(int newDuration){
-		this.duration = newDuration;
+		this.totalDuration = newDuration;
+	}
+	public void setGenreNum(int newGenreNum){
+		this.genreNum = newGenreNum;
+	}
+	public void setGenre(Genre newGenre){
+		this.songGenre = newGenre;
 	}
 	
 	

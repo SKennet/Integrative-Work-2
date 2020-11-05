@@ -61,16 +61,16 @@ public class Server{
 		
 		boolean space = false;
 		String msg = "";
-		PrivatePlaylist newPlaylist = PrivatePlaylist();
+		PrivatePlaylist newPlaylist = new PrivatePlaylist();
 		
 		for(int i = 0; i<MAXIMUM_PLAYLISTS && space != true; i++){
 			if(allPlaylists[i] == null){
 				allPlaylists[i] = newPlaylist;
 				space = true;
-				msg = "Playlist agregada correctamente."
+				msg = "Playlist agregada correctamente.";
 			}
 			else{
-				msg = "No se pudo agregar la playlist."
+				msg = "No se pudo agregar la playlist.";
 			}
 		}
 		return msg;
@@ -80,16 +80,16 @@ public class Server{
 		
 		boolean space = false;
 		String msg = "";
-		PublicPlaylist newPlaylist = PublicPlaylist();
+		PublicPlaylist newPlaylist = new PublicPlaylist();
 		
 		for(int i = 0; i<MAXIMUM_PLAYLISTS && space != true; i++){
 			if(allPlaylists[i] == null){
 				allPlaylists[i] = newPlaylist;
 				space = true;
-				msg = "Playlist agregada correctamente."
+				msg = "Playlist agregada correctamente.";
 			}
 			else{
-				msg = "No se pudo agregar la playlist."
+				msg = "No se pudo agregar la playlist.";
 			}
 		}
 		return msg;
@@ -99,16 +99,16 @@ public class Server{
 		
 		boolean space = false;
 		String msg = "";
-		RestrictedPlaylist newPlaylist = RestrictedPlaylist();
+		RestrictedPlaylist newPlaylist = new RestrictedPlaylist();
 		
 		for(int i = 0; i<MAXIMUM_PLAYLISTS && space != true; i++){
 			if(allPlaylists[i] == null){
 				allPlaylists[i] = newPlaylist;
 				space = true;
-				msg = "Playlist agregada correctamente."
+				msg = "Playlist agregada correctamente.";
 			}
 			else{
-				msg = "No se pudo agregar la playlist."
+				msg = "No se pudo agregar la playlist.";
 			}
 		}
 		return msg;

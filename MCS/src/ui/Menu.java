@@ -68,7 +68,7 @@ public class Menu{
 						break;
 						
 				case 5: 
-						System.out.println(newServer.addRestricteedPlaylist());
+						System.out.println(newServer.addRestrictedPlaylist());
 						break;
 						
 				case 6:
@@ -87,6 +87,6 @@ public class Menu{
 						break;
 			}
 		}
-		System.exit.(0);
+		//System.exit.(1);
 	}
 }

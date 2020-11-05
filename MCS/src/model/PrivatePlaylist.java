@@ -14,7 +14,8 @@ public class PrivatePlaylist extends Playlist{
 	
 	
 	@Override
-	public String addSong(String songName, String artistName, int minutes, int seconds, Genre genre){
-		String msg = super.addSong(songName, artistName, minutes, seconds, genre);
+	public String addSong(String songName, String artistName, String duration, int genre){
+		String msg = super.addSong(songName, artistName, duration, genre);
+		return msg;
 	}
 }
