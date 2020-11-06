@@ -20,23 +20,16 @@ public class User{
 		
 		msg += "*************  User **************" + "\n";
 		msg += "** UserName: "+ nickName + "\n";
-		msg += "Age: " + age +"\n";
-		msg += "Category: " + userCategory+ "\n";
+		msg += "**Age: " + age +"\n";
+		msg += "**Category: " + userCategory+ "\n";
 		msg += "***********************************" + "\n";
 		
 		return msg;
 	}
 	
 	//This will create the new song.
-	public Song addSong(String title, String artist, String duration, int genre){
-		
-		Song newSong = new Song(title, artist, duration, genre);
-
-		songsDonated++; //This will count how many songs has donated the user.
-
-		checkCategory();  //This will refresh the category if it should change.
-		
-		return newSong;
+	public void increaseDonatedSongs(){
+		songsDonated++;
 	} 
 	
 	//this works as a "setCategory", but it does by itself.

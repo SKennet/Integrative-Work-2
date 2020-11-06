@@ -21,13 +21,13 @@ public class Menu{
 		while(finished != true){
 				
 			System.out.println("¿Qué deseas hacer?");
-			System.out.println("Para crear un usuario, digite 1. Para añadir una canción, digite 2. Para añadir una playlist pública, digite 3");
+			System.out.println("Para crear un usuario, digite 1. Para añadir una canción, digite 2. Para añadir una playlist pública, digite 3.");
 			System.out.println("Para añadir una playlist privada, digite 4. Para añadir una playlist restringida, digite 5.");
 			System.out.println("Para listar las canciones agregadas, digite 6. Para listar los usuarios digite 7. Para listar las playlists, digite 8.");
 			System.out.println("Para cerrar la aplicación, digite 9.");
 			
 			optionChoosed = input.nextInt();
-			input.next();
+			input.nextLine();
 			
 			switch(optionChoosed){
 								
@@ -44,6 +44,8 @@ public class Menu{
 						break;
 								
 				case 2: 
+						System.out.println("Por favor ingrese el nombre de usuario de quien quiere añadir la canción.");
+						userName = input.nextLine();
 						System.out.println("Por favor ingrese el titulo de la canción a añadir.");
 						songName = input.nextLine();
 						System.out.println("Por favor ingrese el artista de la canción.");
@@ -52,11 +54,11 @@ public class Menu{
 						songDuration = input.nextLine();
 						System.out.println("Por favor ingrese el número correspondiente al género de la canción.");
 						System.out.println("Si es rock dígite 1, si es hip hop digite 2, si es música clásica digite 3.");
-						System.out.print("Si es reggae digite 4, si es salsa digite 5, o si es metal digite 6 .");
+						System.out.println("Si es reggae digite 4, si es salsa digite 5, o si es metal digite 6 .");
 						songGenreNum = input.nextInt();
 						input.nextLine();
 				
-						System.out.println(newServer.addSong(songName, songArtist, songDuration, songGenreNum));
+						System.out.println(newServer.addSong(songName, songArtist, songDuration, songGenreNum, userName));
 						break;
 				
 				case 3: 
@@ -86,6 +88,7 @@ public class Menu{
 						finished = true;
 						break;
 			}
+			System.out.println();
 		}
 		//System.exit.(1);
 	}

@@ -3,17 +3,20 @@ import model.*;
 
 public class PublicPlaylist extends Playlist{
 	
-	int averageRate = 0; 	    //This stores the average rating.
-	int ratersUsers = 0;		//This stores how many users has rated.
+	int averageRate; 	    //This stores the average rating.
+	int ratersUsers;		//This stores how many users has rated.
 	
 	public PublicPlaylist(){
 		super();
+		averageRate = 0;
+		ratersUsers = 0;
 	}
 	
 	public void addRate(int newRate){
+		
 		ratersUsers++; 			//This counts how many users has rated the playlist.
 		
-		int averageRate = (averageRate/ratersUsers); //This calculates the average rate.
+		averageRate = (averageRate/ratersUsers); //This calculates the average rate.
 	
 	}
 	public int getRate(){

@@ -1,10 +1,12 @@
 package model;
+import model.*;
 
 public class Song{
 	String title, artistName;
 	int genreNum, minutes, seconds, totalDuration;
 	Genres songGenre;
-	String [] duration = new String [2];
+	String [] durationParts = new String [2];
+	
 	
 	
 	public Song(String title, String artistName, String duration, int genreNum){
@@ -12,9 +14,10 @@ public class Song{
 		this.artistName = artistName;
 		this.genreNum = genreNum;
 		
-		this.duration = splitDuration(duration); //This will call the method "splitDuration".
-		this.minutes = Integer.parseInt(duration[0]);
-		this.seconds = Integer.parseInt(duration[1]);
+		//this.duration = 
+		durationParts = splitDuration(duration); //This will call the method "splitDuration".
+		this.minutes = Integer.parseInt(durationParts[0]);
+		this.seconds = Integer.parseInt(durationParts[1]);
 		
 		calculateTotalDuration();
 		
@@ -41,7 +44,7 @@ public class Song{
 	
 	//This separates the duration in minutes and seconds.
 	public String [] splitDuration(String duration){
-		String [] durationParts = String.split(":");
+		String [] durationParts = duration.split(":");
 		return durationParts;
 	}
 	
@@ -52,9 +55,9 @@ public class Song{
 		msg +=  "**************  Song **************" + "\n";
 		msg +=  "**  Title: " + title + "\n";
 		msg +=  "**  Artist: " + artistName + "\n";
-		msg +=	"**  Duration: " + duration + "\n";
-		msg +=	"Genre: " + songGenre + "\n";
-		msg +=  "***********************************";
+		msg +=	"**  Duration: " + minutes + ":" + seconds + "\n";
+		msg +=	"**Genre: " + songGenre + "\n";
+		msg +=  "***********************************" + "\n";
 		
 		return msg;
 	}
@@ -72,7 +75,7 @@ public class Song{
 	public int getGenreNum(){
 		return genreNum;
 	}
-	public Genre getGenre(){
+	public Genres getGenre(){
 		return songGenre;
 	}
 	
@@ -89,7 +92,7 @@ public class Song{
 	public void setGenreNum(int newGenreNum){
 		this.genreNum = newGenreNum;
 	}
-	public void setGenre(Genre newGenre){
+	public void setGenre(Genres newGenre){
 		this.songGenre = newGenre;
 	}
 	

@@ -3,8 +3,9 @@ package model;
 public abstract class Playlist{
 	
 	String name;
-	int durationInSeconds;
+	int durationInSeconds, playlistDuration;
 	int	MAXIMUM_SONGS = 30, MAXIMUM_GENRES = 6;
+	Genres [] hasGenres;
 
 	
 	int playlistGenres [];	
@@ -15,18 +16,22 @@ public abstract class Playlist{
 		name = "";
 		playlistSongs = new Song [MAXIMUM_SONGS];
 		playlistGenres = new int [MAXIMUM_GENRES];	
+		hasGenres = new Genres [MAXIMUM_GENRES];
 	}
 	
 	public String displayPlaylist(){
+		calculateDuration();
+		String msg = "";
 		boolean space = false;
 		
 		while( space != true){
-			msg += "**************  Playlist **************" + \n";
-			msg += "Title: " + +"\n";
-			msg += "Duration: " "\n";
+			msg += "**************  Playlist **************" + "\n";
+			msg += "Title: " + name + "\n";
+			msg += "Duration: " + playlistDuration + "\n";
 			msg += "Genre: " + hasGenres + "\n";
 			msg += "***************************************" +"\n";
 		}
+		return msg;
 	}
 	
 	public void setName(String newName){
@@ -46,6 +51,7 @@ public abstract class Playlist{
 	}
 	
 	public void calculateDuration(){
+		String playlistDuration = "";
 		boolean space = false;
 		int minutes = 0, seconds = 0;
 		for(int i=0; space != true; i++){
@@ -59,7 +65,14 @@ public abstract class Playlist{
 			}
 		}
 		
-		durationInSeconds = (minutes/60) + (seconds);
+		durationInSeconds = (minutes*60) + (seconds);
+		
+		if(durationInSeconds<60){
+			playlistDuration = "00:" + seconds;
+		}
+		else{
+			playlistDuration = minutes + ":" + seconds;
+		}
 	}
 	
 	public Genres [] checkGenres(){
