@@ -18,6 +18,8 @@ public class User{
 	public String displayUser(){
 		String msg = "";
 		
+		checkCategory();
+		
 		msg += "*************  User **************" + "\n";
 		msg += "** UserName: "+ nickName + "\n";
 		msg += "**Age: " + age +"\n";

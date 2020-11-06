@@ -44,27 +44,34 @@ public class Server{
 		//This checks if the user exist.
 		for(int i = 0; i<MAXIMUM_USERS && userFounded != true; i++){
 			if(allUsers[i] != null){
-				if(allUsers[i].getNickName().equals(userName)){
+				if(allUsers[i].getNickName().equalsIgnoreCase(userName)){
 					userFounded = true;
 					userNum = i;
 				
 					msg = "Usuario encontrado.";
+				}
+				else{
+					msg = "No se pudo agregar la canción. Usuario no encontrado.";
 				}
 			}			
 		}
 		
 		Song newSong = new Song(title, artistName, duration, genreNum);
 		
-		for(int i = 0; i<MAXIMUM_SONGS && space != true; i++){
-			if(allSongs[i] == null && userFounded == true){
-				allSongs[i] = newSong;
-				space = true;
-				allUsers[userNum].increaseDonatedSongs();
-				msg += "Canción agregada correctamente.";
+		//This if verificates that the maximum of songs haven't been reached.
+		if(allSongs[MAXIMUM_SONGS-1] == null){
+			for(int i = 0; i<MAXIMUM_SONGS && space != true; i++){
+				if(allSongs[i] == null && userFounded == true){
+					allSongs[i] = newSong;
+					space = true;
+					allUsers[userNum].increaseDonatedSongs();
+					msg += "Canción agregada correctamente.";
+				}
+
 			}
-			else{
-				msg = "No se pudo agregar la canción. Usuario no encontrado, o límite de canciones excedido.";
-			}
+		}
+		else{
+			msg = "Límite de canciones excedido.";
 		}
 		return msg;
 	}

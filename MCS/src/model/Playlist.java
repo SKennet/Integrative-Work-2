@@ -13,24 +13,22 @@ public abstract class Playlist{
 	
 	public Playlist(){
 		durationInSeconds = 0;
-		name = "";
+		name = "Música para programar.";
 		playlistSongs = new Song [MAXIMUM_SONGS];
 		playlistGenres = new int [MAXIMUM_GENRES];	
 		hasGenres = new Genres [MAXIMUM_GENRES];
+		hasGenres[0] = Genres.DESCONOCIDO;
 	}
 	
 	public String displayPlaylist(){
 		calculateDuration();
 		String msg = "";
-		boolean space = false;
-		
-		while( space != true){
+	
 			msg += "**************  Playlist **************" + "\n";
 			msg += "Title: " + name + "\n";
 			msg += "Duration: " + playlistDuration + "\n";
 			msg += "Genre: " + hasGenres + "\n";
-			msg += "***************************************" +"\n";
-		}
+		
 		return msg;
 	}
 	

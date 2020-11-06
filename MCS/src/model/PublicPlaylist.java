@@ -28,4 +28,11 @@ public class PublicPlaylist extends Playlist{
 		String msg = super.addSong(songName, artistName, duration, genre);
 		return msg;
 	}
+	
+	@Override 
+	public String displayPlaylist(){
+		String msg = super.displayPlaylist();
+		msg += "La calificación promedio de la playlist es de: " + averageRate;
+		return msg;
+	}
 }
