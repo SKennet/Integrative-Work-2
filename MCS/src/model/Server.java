@@ -76,7 +76,7 @@ public class Server{
 		return msg;
 	}
 	
-	public String addPrivatePlaylist(String playlistName, String wantsToAddSong, int songToAdd){
+	public String addPrivatePlaylist(String playlistName){
 		
 		boolean space = false;
 		String msg = "";
@@ -93,23 +93,19 @@ public class Server{
 				msg = "No se pudo agregar la playlist.";
 			}
 		}
-	
-		songToAdd = songToAdd-1;
-	
-		if(playlistName.equalsIgnoreCase("*NO*")){
-			;
-		}
-		else if(wantsToAddSong.equalsIgnoreCase("SÍ")){
-			newPlaylist.addSong(allSongs[songToAdd]);
-		}
-		else if(playlistName.equalsIgnoreCase("*NO*") != true){
+		
+		//This changes the name of the playlist.
+		if(playlistName.equalsIgnoreCase("*NO*") != true){
 			newPlaylist.setName(playlistName);
+		}
+		else{
+			newPlaylist.setName("Música para programar.");
 		}
 		
 		return msg;
 	}
 	
-	public String addPublicPlaylist(String playlistName, String wantsToAddSong, int songToAdd){
+	public String addPublicPlaylist(String playlistName){
 		
 		boolean space = false;
 		String msg = "";
@@ -125,22 +121,17 @@ public class Server{
 				msg = "No se pudo agregar la playlist.";
 			}
 		}	
-		
-		songToAdd = songToAdd-1;
-		
-		if(playlistName.equalsIgnoreCase("*NO*")){
-			;
-		}
-		else if(wantsToAddSong.equalsIgnoreCase("SÍ")){
-			newPlaylist.addSong(allSongs[songToAdd]);
-		}
-		else if(playlistName.equalsIgnoreCase("*NO*") != true){
+		//This changes the name of the playlist.
+		if(playlistName.equalsIgnoreCase("*NO*") != true){
 			newPlaylist.setName(playlistName);
+		}
+		else{
+			newPlaylist.setName("Música para programar.");
 		}
 		return msg;
 	}
 	
-	public String addRestrictedPlaylist(String playlistName, String wantsToAddSong, int songToAdd){
+	public String addRestrictedPlaylist(String playlistName){
 		
 		boolean space = false;
 		String msg = "";
@@ -157,16 +148,12 @@ public class Server{
 			}
 		}
 		
-		songToAdd = songToAdd-1;
-		
-		if(playlistName.equalsIgnoreCase("*NO*")){
-			;
-		}
-		else if(wantsToAddSong.equalsIgnoreCase("SÍ")){
-			newPlaylist.addSong(allSongs[songToAdd]);
-		}
-		else if(playlistName.equalsIgnoreCase("*NO*") != true){
+		//This changes the name of the playlist.
+		if(playlistName.equalsIgnoreCase("*NO*") != true){
 			newPlaylist.setName(playlistName);
+		}
+		else{
+			newPlaylist.setName("Música para programar.");
 		}
 		
 		return msg;
@@ -186,6 +173,36 @@ public class Server{
 		}
 		else{
 			msg = "Playlist inexistente. No se pudo agregar la canción.";
+		}
+		return msg;
+	}
+	
+	public String addRate(int playlistTarget, double rate){
+		String msg = "";
+		playlistTarget = playlistTarget-1;
+		
+		if(allPlaylists[playlistTarget] instanceof PublicPlaylist){
+			allPlaylists[playlistTarget].addRate(rate);
+			msg = "Calificación añadida exitosamente. La calificación promedio actual es de: " + allPlaylists[playlistTarget].getRate();
+		}
+		else{
+			msg = "La playlist escogida no es pública. Vuelva a intentar.";
+		}
+		
+		return msg;
+	}
+	public String addOwner(int targetPlaylist, int targetUser){
+		String msg = "";
+		targetUser = targetUser-1;
+		targetPlaylist = targetPlaylist-1;
+		
+		User ownerToAdd = allUsers[targetUser];
+		
+		if(allPlaylists[targetPlaylist] instanceof PublicPlaylist){
+			msg = "No se pudo agregar el usuario dueño porque la playlist es pública.";
+		}
+		else{
+			msg = allPlaylists[targetPlaylist].addOwnerUser(ownerToAdd);
 		}
 		return msg;
 	}
@@ -228,6 +245,7 @@ public class Server{
 		for(int i = 0; i<MAXIMUM_PLAYLISTS && space != true; i++){
 			if(allPlaylists[i] != null){
 				msg += allPlaylists[i].displayPlaylist() + "\n";
+				msg += "\n";
 			}
 			else{
 				space = true;
@@ -235,4 +253,13 @@ public class Server{
 		}
 		return msg;
 	}
+	
+	public String changePlaylistName(int targetPlaylist, String newName){
+		String msg;
+		targetPlaylist = targetPlaylist-1;
+		allPlaylists[targetPlaylist].setName(newName);
+		msg = "Nombre actualizado correctamente a: " + newName;
+		return msg;
+	}
 }
+

@@ -4,7 +4,7 @@ public abstract class Playlist{
 	
 	String name;
 	int durationInSeconds, playlistDuration;
-	int	MAXIMUM_SONGS = 30, MAXIMUM_GENRES = 6;
+	int	MAXIMUM_SONGS = 30, MAXIMUM_GENRES = 7;
 	Genres [] hasGenres;
 	
 	int playlistGenres [];	
@@ -31,12 +31,10 @@ public abstract class Playlist{
 			if(hasGenres[i] != null){
 				genres += hasGenres[i] + ", ";				
 			}
-			/*else{
-					space = true;
-					
-					genres.valueOf(Genres.DESCONOCIDO);
-				}*/
-			
+		}
+		
+		if(duration.equals("00:0")){
+			duration = "00:00";
 		}
 		String msg = "";
 	
@@ -46,6 +44,15 @@ public abstract class Playlist{
 			msg += "*Genre: " + genres + "\n";
 		
 		return msg;
+	}
+	
+	public void addRate(double rate){
+		;
+	}
+	
+	public double getRate(){
+		double rate = 0;
+		return rate;
 	}
 	
 	public void setName(String newName){
@@ -67,7 +74,7 @@ public abstract class Playlist{
 	public String calculateDuration(){
 		String playlistDuration = "";
 		boolean space = false;
-		int minutes = 0, seconds = 0;
+		int minutes = 0, seconds = 0, extraMinutes = 0; //Variable extraminutes it's used to save the minutes if the total seconds are more than 59
 		for(int i=0; space != true; i++){
 			if(playlistSongs[i] != null){
 				playlistGenres [i] = playlistSongs[i].getGenreNum();
@@ -88,6 +95,13 @@ public abstract class Playlist{
 			playlistDuration = "00:00";
 		}
 		else{
+			
+			if(seconds>59){
+				extraMinutes = (int)(seconds/60);
+				minutes = minutes + extraMinutes;
+				seconds = seconds- (extraMinutes*60);
+			}
+			
 			playlistDuration = minutes + ":" + seconds;
 		}
 		return playlistDuration;
@@ -113,8 +127,11 @@ public abstract class Playlist{
 			else if(playlistGenres[i] == 5){
 				hasGenres[4] = Genres.SALSA; 
 			}
-			if(playlistGenres[i] == 6){
+			else if(playlistGenres[i] == 6){
 				hasGenres[5] = Genres.METAL; 
+			}
+			else{
+				hasGenres[6] = Genres.DESCONOCIDO;
 			}
 		}
 		return hasGenres;
@@ -145,4 +162,8 @@ public abstract class Playlist{
 		return msg;
 	}
 	
+	public String addOwnerUser(User newOwner){
+		String msg = "";
+		return msg;
+	}
 }

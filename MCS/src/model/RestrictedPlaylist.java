@@ -15,7 +15,27 @@ public class RestrictedPlaylist extends Playlist{
 		return msg;
 	}
 	
-	//This it's the constructor if the user wants to set the owners users.
+	@Override
+	public String addOwnerUser(User ownerUser){
+		
+		String msg = "";
+		boolean space = false;
+		
+		for(int i = 0; i<MAXIMUM_USERS && space != true ; i++){
+			if(usersAllowed[i] == null){
+				usersAllowed[i] = ownerUser;
+				msg = "Usuario agregado correctamente.";
+				space = true;
+			}
+			else{
+				msg = "No se pudo agregar el usuario.";
+			}
+		}
+		return msg;
+	}
+	
+	
+	//This it's the constructor if the user wants to set the owners users. For future versions.
 	public RestrictedPlaylist(User ownerUser1, User ownerUser2, User ownerUser3, User ownerUser4, User ownerUser5){
 		super();
 		 
@@ -39,6 +59,7 @@ public class RestrictedPlaylist extends Playlist{
 				space = true;
 			}
 		}
+		msg += "\n";
 		msg += "********************************************* \n";
 		return msg;
 	}

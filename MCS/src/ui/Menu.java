@@ -15,10 +15,11 @@ public class Menu{
 	//Songs variables.
 	String songName, songDuration, songArtist;
 	int songGenreNum;
+	double rate;
 		
 	//Playlist variables.
-	String playlistName, wantsToAddSong;
-	int songNum, playChoosed;
+	String playlistName;
+	int songNum, playChoosed, userToAdd;
 	
 	
 	//This it's the server with the arrays. It stores all the users, songs, and playlists.
@@ -40,7 +41,10 @@ public class Menu{
 			System.out.println("Para listar los usuarios digite 7.");
 			System.out.println("Para listar las playlists, digite 8.");
 			System.out.println("Para agregar una canción a una playlist, digite 9.");
-			System.out.println("Para cerrar la aplicación, digite 10.");
+			System.out.println("Para calificar una playlist, ingrese 10");
+			System.out.println("Para cambiar el nombre de una playlist, digite 11.");
+			System.out.println("Para agregar un usuario con acceso a una playlist restringidad o privada, ingrese 12.");
+			System.out.println("Para cerrar la aplicación, digite 13.");
 			System.out.println("");
 			
 			optionChoosed = input.nextInt();
@@ -81,44 +85,20 @@ public class Menu{
 				case 3: 
 						System.out.println("¿Desea ponerle nombre a la playlist? Si es así escriba el nombre a asignar, de lo contrario escriba: *NO*");
 						playlistName = input.nextLine();
-						System.out.println("¿Desea agregar una canción a la playlist? Escriba " + "SÍ" + ". De lo contrario escriba " + "NO");
-						wantsToAddSong = input.nextLine();
 						
-						System.out.println(newServer.displaySongs());
-						
-						System.out.println("¿Cuál es el número de la canción que desea agregar?");
-						songNum = input.nextInt();
-						input.nextLine(); 
-						
-						System.out.println(newServer.addPublicPlaylist(playlistName, wantsToAddSong, songNum));
+						System.out.println(newServer.addPublicPlaylist(playlistName));
 						break;		
 						
 				case 4:
 						System.out.println("¿Desea ponerle nombre a la playlist? Si es así escriba el nombre a asignar, de lo contrario escriba: *NO*");
 						playlistName = input.nextLine();
-						System.out.println("¿Desea agregar una canción a la playlist? Escriba " + "SÍ" + ". De lo contrario escriba " + "NO");
-						wantsToAddSong = input.nextLine();
-						
-						System.out.println(newServer.displaySongs());
-						
-						System.out.println("¿Cuál es el número de la canción que desea agregar?");
-						songNum = input.nextInt();
-						input.nextLine(); 
-						System.out.println(newServer.addPrivatePlaylist(playlistName, wantsToAddSong, songNum));
+						System.out.println(newServer.addPrivatePlaylist(playlistName));
 						break;
 						
 				case 5: 
 						System.out.println("¿Desea ponerle nombre a la playlist? Si es así escriba el nombre a asignar, de lo contrario escriba: *NO*");
 						playlistName = input.nextLine();
-						System.out.println("¿Desea agregar una canción a la playlist? Escriba " + "SÍ" + ". De lo contrario escriba " + "NO");
-						wantsToAddSong = input.nextLine();
-						
-						System.out.println(newServer.displaySongs());
-						
-						System.out.println("¿Cuál es el número de la canción que desea agregar?");
-						songNum = input.nextInt();
-						input.nextLine(); 
-						System.out.println(newServer.addRestrictedPlaylist(playlistName, wantsToAddSong, songNum));
+						System.out.println(newServer.addRestrictedPlaylist(playlistName));
 						break;
 				case 6:
 						System.out.println(newServer.displaySongs());
@@ -143,7 +123,38 @@ public class Menu{
 						songNum = input.nextInt();
 						System.out.println(newServer.addSongToPlaylist(songNum, playChoosed));
 						break;
+						
 				case 10:
+						System.out.println("¿Cuál es la playlist a la que desea agregar la calificación? Asegurese de que la playlist seleccionada sea pública.");
+						playChoosed = input.nextInt();
+						System.out.println("¿Cuál calificación quieres darle? Ingresa un número de 1 a 5, siendo 1 la calificación más baja, y 5 la más alta.");
+						rate = input.nextDouble();
+						input.nextLine();
+						System.out.println(newServer.addRate(playChoosed, rate));
+						break;
+						
+				case 11:
+						System.out.println("¿Cuál es la playlist a la que le quieres cambiar el nombre? Por favor ingresa su número.");
+						System.out.println(newServer.displayPlaylists());
+						playChoosed = input.nextInt();
+						input.nextLine();
+						System.out.println("¿Cuál es el nombre que le quieres poner?");
+						playlistName = input.nextLine();
+						System.out.println(newServer.changePlaylistName(playChoosed, playlistName));
+						break;
+						
+				case 12:
+						System.out.println("¿A cuál playlist quieres agregar el usuario con acceso?");
+						System.out.println(newServer.displayPlaylists());
+						playChoosed = input.nextInt();
+						System.out.println("¿Cuál es el usuario que quieres agregar?");
+						System.out.println(newServer.displayUsers());
+						userToAdd = input.nextInt();
+						input.nextLine();
+						System.out.println(newServer.addOwner(playChoosed, userToAdd));
+						break;
+						
+				case 13:
 						finished = true;
 						break;
 			}
