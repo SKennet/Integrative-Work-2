@@ -6,7 +6,6 @@ public abstract class Playlist{
 	int durationInSeconds, playlistDuration;
 	int	MAXIMUM_SONGS = 30, MAXIMUM_GENRES = 6;
 	Genres [] hasGenres;
-
 	
 	int playlistGenres [];	
 	Song playlistSongs []; 
@@ -15,19 +14,36 @@ public abstract class Playlist{
 		durationInSeconds = 0;
 		name = "Música para programar.";
 		playlistSongs = new Song [MAXIMUM_SONGS];
-		playlistGenres = new int [MAXIMUM_GENRES];	
+		playlistGenres = new int [MAXIMUM_SONGS];	
 		hasGenres = new Genres [MAXIMUM_GENRES];
 		hasGenres[0] = Genres.DESCONOCIDO;
 	}
 	
 	public String displayPlaylist(){
-		calculateDuration();
+		
+		hasGenres = checkGenres();
+		String duration = calculateDuration();
+		
+		boolean space = false;
+		String genres = "";
+		
+		for(int i = 0; i<MAXIMUM_GENRES && space != true; i++){
+			if(hasGenres[i] != null){
+				genres += hasGenres[i] + ", ";				
+			}
+			/*else{
+					space = true;
+					
+					genres.valueOf(Genres.DESCONOCIDO);
+				}*/
+			
+		}
 		String msg = "";
 	
 			msg += "**************  Playlist **************" + "\n";
-			msg += "Title: " + name + "\n";
-			msg += "Duration: " + playlistDuration + "\n";
-			msg += "Genre: " + hasGenres + "\n";
+			msg += "*Title: " + name + "\n";
+			msg += "*Duration: " + duration + "\n";
+			msg += "*Genre: " + genres + "\n";
 		
 		return msg;
 	}
@@ -48,15 +64,15 @@ public abstract class Playlist{
 		return durationInSeconds;
 	}
 	
-	public void calculateDuration(){
+	public String calculateDuration(){
 		String playlistDuration = "";
 		boolean space = false;
 		int minutes = 0, seconds = 0;
 		for(int i=0; space != true; i++){
 			if(playlistSongs[i] != null){
 				playlistGenres [i] = playlistSongs[i].getGenreNum();
-				minutes += playlistSongs[i].minutes;
-				seconds += playlistSongs[i].seconds;
+				minutes += playlistSongs[i].getMinutes();
+				seconds += playlistSongs[i].getSeconds();
 			}
 			else{
 				space = true;
@@ -68,9 +84,13 @@ public abstract class Playlist{
 		if(durationInSeconds<60){
 			playlistDuration = "00:" + seconds;
 		}
+		else if(durationInSeconds==0){
+			playlistDuration = "00:00";
+		}
 		else{
 			playlistDuration = minutes + ":" + seconds;
 		}
+		return playlistDuration;
 	}
 	
 	public Genres [] checkGenres(){
@@ -100,7 +120,7 @@ public abstract class Playlist{
 		return hasGenres;
 	}
 	
-	public String addSong(String songName, String artistName, String duration, int genre){
+	public String addSong(Song songToAdd){
 		
 		boolean space = false;
 		int i= 0;
@@ -111,8 +131,8 @@ public abstract class Playlist{
 			
 			if(playlistSongs[i] == null){
 				space = true;
-				Song newSong = new Song(songName, artistName, duration, genre);
-				playlistGenres[i] = genre; //This has all the genres of the playlist.
+				playlistSongs[i] = songToAdd;
+				playlistGenres[i] = songToAdd.getGenreNum(); //This has all the genres of the playlist.
 				msg = "Canción añadida correctamente.";
 			}
 			else{

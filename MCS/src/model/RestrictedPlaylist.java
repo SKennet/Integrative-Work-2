@@ -10,8 +10,8 @@ public class RestrictedPlaylist extends Playlist{
 	
 	
 	@Override
-	public String addSong(String songName, String artistName, String duration, int genre){
-		String msg = super.addSong(songName, artistName, duration, genre);
+	public String addSong(Song songToAdd){
+		String msg = super.addSong(songToAdd);
 		return msg;
 	}
 	

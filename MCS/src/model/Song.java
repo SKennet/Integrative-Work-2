@@ -19,7 +19,7 @@ public class Song{
 		this.minutes = Integer.parseInt(durationParts[0]);
 		this.seconds = Integer.parseInt(durationParts[1]);
 		
-		calculateTotalDuration();
+		totalDuration = calculateTotalDuration();
 		
 		switch(genreNum){
 			case 1:	songGenre = Genres.ROCK;
@@ -53,9 +53,9 @@ public class Song{
 		String msg ="";
 		
 		msg +=  "**************  Song **************" + "\n";
-		msg +=  "**  Title: " + title + "\n";
-		msg +=  "**  Artist: " + artistName + "\n";
-		msg +=	"**  Duration: " + minutes + ":" + seconds + "\n";
+		msg +=  "**Title: " + title + "\n";
+		msg +=  "**Artist: " + artistName + "\n";
+		msg +=	"**Duration: " + minutes + ":" + seconds + "\n";
 		msg +=	"**Genre: " + songGenre + "\n";
 		msg +=  "***********************************" + "\n";
 		
@@ -77,6 +77,12 @@ public class Song{
 	}
 	public Genres getGenre(){
 		return songGenre;
+	}
+	public int getMinutes(){
+		return minutes;
+	}
+	public int getSeconds(){
+		return seconds;
 	}
 	
 	///This are the setters.

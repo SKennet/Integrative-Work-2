@@ -8,23 +8,40 @@ public class Menu{
 	int optionChoosed;
 	boolean finished = false;
 	
+	//User variables.
 	String userName, userPassword;
 	int userAge;
 	
+	//Songs variables.
 	String songName, songDuration, songArtist;
 	int songGenreNum;
+		
+	//Playlist variables.
+	String playlistName, wantsToAddSong;
+	int songNum, playChoosed;
+	
 	
 	//This it's the server with the arrays. It stores all the users, songs, and playlists.
 	Server newServer = new Server();
 	
 	public Menu(){
+		
+		System.out.println("¡Bienvenido/a a MCS!");
+		System.out.println(showLogo());
 		while(finished != true){
 				
 			System.out.println("¿Qué deseas hacer?");
-			System.out.println("Para crear un usuario, digite 1. Para añadir una canción, digite 2. Para añadir una playlist pública, digite 3.");
-			System.out.println("Para añadir una playlist privada, digite 4. Para añadir una playlist restringida, digite 5.");
-			System.out.println("Para listar las canciones agregadas, digite 6. Para listar los usuarios digite 7. Para listar las playlists, digite 8.");
-			System.out.println("Para cerrar la aplicación, digite 9.");
+			System.out.println("Para crear un usuario, digite 1.");
+			System.out.println("Para añadir una canción, digite 2.");
+			System.out.println("Para añadir una playlist pública, digite 3.");
+			System.out.println("Para añadir una playlist privada, digite 4.");
+			System.out.println("Para añadir una playlist restringida, digite 5.");
+			System.out.println("Para listar las canciones agregadas, digite 6.");
+			System.out.println("Para listar los usuarios digite 7.");
+			System.out.println("Para listar las playlists, digite 8.");
+			System.out.println("Para agregar una canción a una playlist, digite 9.");
+			System.out.println("Para cerrar la aplicación, digite 10.");
+			System.out.println("");
 			
 			optionChoosed = input.nextInt();
 			input.nextLine();
@@ -62,17 +79,47 @@ public class Menu{
 						break;
 				
 				case 3: 
-						System.out.println(newServer.addPublicPlaylist());
+						System.out.println("¿Desea ponerle nombre a la playlist? Si es así escriba el nombre a asignar, de lo contrario escriba: *NO*");
+						playlistName = input.nextLine();
+						System.out.println("¿Desea agregar una canción a la playlist? Escriba " + "SÍ" + ". De lo contrario escriba " + "NO");
+						wantsToAddSong = input.nextLine();
+						
+						System.out.println(newServer.displaySongs());
+						
+						System.out.println("¿Cuál es el número de la canción que desea agregar?");
+						songNum = input.nextInt();
+						input.nextLine(); 
+						
+						System.out.println(newServer.addPublicPlaylist(playlistName, wantsToAddSong, songNum));
 						break;		
 						
 				case 4:
-						System.out.println(newServer.addPrivatePlaylist());
+						System.out.println("¿Desea ponerle nombre a la playlist? Si es así escriba el nombre a asignar, de lo contrario escriba: *NO*");
+						playlistName = input.nextLine();
+						System.out.println("¿Desea agregar una canción a la playlist? Escriba " + "SÍ" + ". De lo contrario escriba " + "NO");
+						wantsToAddSong = input.nextLine();
+						
+						System.out.println(newServer.displaySongs());
+						
+						System.out.println("¿Cuál es el número de la canción que desea agregar?");
+						songNum = input.nextInt();
+						input.nextLine(); 
+						System.out.println(newServer.addPrivatePlaylist(playlistName, wantsToAddSong, songNum));
 						break;
 						
 				case 5: 
-						System.out.println(newServer.addRestrictedPlaylist());
-						break;
+						System.out.println("¿Desea ponerle nombre a la playlist? Si es así escriba el nombre a asignar, de lo contrario escriba: *NO*");
+						playlistName = input.nextLine();
+						System.out.println("¿Desea agregar una canción a la playlist? Escriba " + "SÍ" + ". De lo contrario escriba " + "NO");
+						wantsToAddSong = input.nextLine();
 						
+						System.out.println(newServer.displaySongs());
+						
+						System.out.println("¿Cuál es el número de la canción que desea agregar?");
+						songNum = input.nextInt();
+						input.nextLine(); 
+						System.out.println(newServer.addRestrictedPlaylist(playlistName, wantsToAddSong, songNum));
+						break;
 				case 6:
 						System.out.println(newServer.displaySongs());
 						break;
@@ -84,12 +131,68 @@ public class Menu{
 				case 8: 
 						System.out.println(newServer.displayPlaylists());
 						break;
-				case 9:
+						
+				case 9:	
+						optionChoosed = 0;
+						System.out.println(newServer.displayPlaylists());
+						System.out.println("¿Cuál es el número de la playlist a la que quieres agregar la canción? Por favor, digitalo.");
+						playChoosed = input.nextInt();
+						
+						System.out.println("¿Cuál es el número de la canción que quieres agregar a la playlist? Por favor, digitalo.");
+						System.out.println(newServer.displaySongs());
+						songNum = input.nextInt();
+						System.out.println(newServer.addSongToPlaylist(songNum, playChoosed));
+						break;
+				case 10:
 						finished = true;
 						break;
 			}
 			System.out.println();
 		}
-		//System.exit.(1);
+		
+	}
+	
+	public String showLogo(){
+		String msg = "";
+		
+		msg += "(((((((((((((((((((((((((((((((((((((((((((((((((" + "\n";
+		msg += "((((((((((((((((/((((((((((((((((((((((((((((((((" + "\n";
+		msg += "(((/  .(((((((*  .((((((*        (((((/      /(((" + "\n";
+		msg += "(((/   .((((((.  .(((((   ,((((((((((*  .((((((((" + "\n";
+		msg += "(((/    /((((/   .((((/  ,(((((((((((.  /((((((((" + "\n";
+		msg += "(((/     ((((*   .((((*  ,(((((((((((/   ((((((((" + "\n";
+		msg += "(((/  *  *(((     ((((*  ,((((((((((((,  .((((((("+ "\n";
+		msg += "(((/  /.  ((*     ((((*  *(((((((((((((,   (((((("+ "\n";
+		msg += "(((/  //  ,(  .   ((((*  *((((((((((((((/   /(((("+ "\n";
+		msg += "(((/  *(*  ,  (   ((((*  *((((((((((((((((   /((("+ "\n";
+		msg += "(((/  ,(/    ,(   /(((*  ,(((((((((((((((((   ((("+ "\n";
+		msg += "(((/  .((    ((   /((((  .(((((((((((((((((.  /(("+ "\n";
+		msg += "(((/  .((.  .((.  *((((,  *((((((((((((((((   /(("+ "\n";
+		msg += "(((/  .((((((((.  *(((((   *((((/,/(((((((/   ((("+ "\n";
+		msg += "(((/  .((((((((.  *((((((.        *((   .   .(((("+ "\n";
+		msg += "(((((((((((((((/*/((((((((((///(((((((////((((((("+ "\n";
+		msg += "((((((((((((((((((((((((((((((((((((((((((((((((("+ "\n";
+		msg += "               ./(###((///((###(*                "+ "\n";
+		msg += "           *#(,                   *((,           "+ "\n";
+		msg += "        ,#/                           ((         "+ "\n";
+		msg += "      .#*          .**/////*,.          ((       "+ "\n";
+		msg += "     *(.      .//////////////////*       *#      "+ "\n";
+		msg += "    .#,     *///////////////////////,     /(     "+ "\n";
+		msg += "    /(    *///////////////////////////    .#.    "+ "\n";
+		msg += "  ,/////,*/////////////////////////////,*////*.  "+ "\n";
+		msg += "  /////////////////////////*,...,/////////////,  "+ "\n";
+		msg += "  //////*,,,********,,.............,,,,,//////,  "+ "\n";
+		msg += "  //////*.........//*........//*.......,//////, "+ "\n";
+		msg += "  //////*.........,,.........,,........,//////,  "+ "\n";
+		msg += "  //////*..............................,//////,  "+ "\n";
+		msg += "   *///*  ........,/.........**.......  .*///,  "+ "\n";
+		msg += "            .......,/*.....,/*.......            "+ "\n";
+		msg += "               ........,,,,.......               "+ "\n";
+		msg += "                    .........                    "+ "\n";
+		msg += ""+ "\n";
+		msg += "*************************************************"+ "\n";
+		msg += ""+ "\n";
+		
+		return msg;
 	}
 }

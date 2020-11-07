@@ -1,0 +1,5 @@
+-cp
+src
+src/ui/Main.java
+-d
+bin

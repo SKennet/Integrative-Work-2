@@ -65,7 +65,7 @@ public class Server{
 					allSongs[i] = newSong;
 					space = true;
 					allUsers[userNum].increaseDonatedSongs();
-					msg += "Canción agregada correctamente.";
+					msg += " Canción agregada correctamente.";
 				}
 
 			}
@@ -76,10 +76,11 @@ public class Server{
 		return msg;
 	}
 	
-	public String addPrivatePlaylist(){
+	public String addPrivatePlaylist(String playlistName, String wantsToAddSong, int songToAdd){
 		
 		boolean space = false;
 		String msg = "";
+		
 		PrivatePlaylist newPlaylist = new PrivatePlaylist();
 		
 		for(int i = 0; i<MAXIMUM_PLAYLISTS && space != true; i++){
@@ -92,10 +93,23 @@ public class Server{
 				msg = "No se pudo agregar la playlist.";
 			}
 		}
+	
+		songToAdd = songToAdd-1;
+	
+		if(playlistName.equalsIgnoreCase("*NO*")){
+			;
+		}
+		else if(wantsToAddSong.equalsIgnoreCase("SÍ")){
+			newPlaylist.addSong(allSongs[songToAdd]);
+		}
+		else if(playlistName.equalsIgnoreCase("*NO*") != true){
+			newPlaylist.setName(playlistName);
+		}
+		
 		return msg;
 	}
 	
-	public String addPublicPlaylist(){
+	public String addPublicPlaylist(String playlistName, String wantsToAddSong, int songToAdd){
 		
 		boolean space = false;
 		String msg = "";
@@ -110,11 +124,23 @@ public class Server{
 			else{
 				msg = "No se pudo agregar la playlist.";
 			}
+		}	
+		
+		songToAdd = songToAdd-1;
+		
+		if(playlistName.equalsIgnoreCase("*NO*")){
+			;
+		}
+		else if(wantsToAddSong.equalsIgnoreCase("SÍ")){
+			newPlaylist.addSong(allSongs[songToAdd]);
+		}
+		else if(playlistName.equalsIgnoreCase("*NO*") != true){
+			newPlaylist.setName(playlistName);
 		}
 		return msg;
 	}
 	
-	public String addRestrictedPlaylist(){
+	public String addRestrictedPlaylist(String playlistName, String wantsToAddSong, int songToAdd){
 		
 		boolean space = false;
 		String msg = "";
@@ -130,9 +156,39 @@ public class Server{
 				msg = "No se pudo agregar la playlist.";
 			}
 		}
+		
+		songToAdd = songToAdd-1;
+		
+		if(playlistName.equalsIgnoreCase("*NO*")){
+			;
+		}
+		else if(wantsToAddSong.equalsIgnoreCase("SÍ")){
+			newPlaylist.addSong(allSongs[songToAdd]);
+		}
+		else if(playlistName.equalsIgnoreCase("*NO*") != true){
+			newPlaylist.setName(playlistName);
+		}
+		
 		return msg;
 	}
 	
+	public String addSongToPlaylist(int songToAdd, int targetPlaylist){
+		
+		String msg = "";
+		Song songWanted;
+		targetPlaylist = targetPlaylist-1;
+		songToAdd = songToAdd-1;
+		
+		if(allPlaylists[targetPlaylist] != null){
+			songWanted = allSongs[songToAdd];
+			allPlaylists[targetPlaylist].addSong(songWanted); 
+			msg = "Canción agregada correctamente.";
+		}
+		else{
+			msg = "Playlist inexistente. No se pudo agregar la canción.";
+		}
+		return msg;
+	}
 	//Display methods.
 	
 	public String displayUsers(){
@@ -170,7 +226,7 @@ public class Server{
 		boolean space = false;
 		
 		for(int i = 0; i<MAXIMUM_PLAYLISTS && space != true; i++){
-			if(allSongs[i] != null){
+			if(allPlaylists[i] != null){
 				msg += allPlaylists[i].displayPlaylist() + "\n";
 			}
 			else{
