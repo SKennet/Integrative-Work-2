@@ -4,12 +4,18 @@ public abstract class Playlist{
 	
 	String name;
 	int durationInSeconds, playlistDuration;
-	int	MAXIMUM_SONGS = 30, MAXIMUM_GENRES = 7;
+	private static final int MAXIMUM_SONGS = 30, MAXIMUM_GENRES = 7;
 	Genres [] hasGenres;
 	
 	int playlistGenres [];	
 	Song playlistSongs []; 
 	
+	/**
+	*This method creates an object of the class playlist. <br>
+	*<b> pre: </b> the package model must be imported in the class who it's going to create the object.<br>
+	*<b> post: </b> the method will create an object.<br>
+	*@return void <br>
+	*/
 	public Playlist(){
 		durationInSeconds = 0;
 		name = "Música para programar.";
@@ -19,6 +25,12 @@ public abstract class Playlist{
 		hasGenres[0] = Genres.DESCONOCIDO;
 	}
 	
+	/**
+	*This method displays the information of the playlist.<br>
+	*<b>pre: </b> the playlist must be initializated before. <br>
+	*<b>post </b>  the user will know the information of the playlist. <br>
+	*@return String, this method returns a message with the information of the playlist. <br>
+	*/
 	public String displayPlaylist(){
 		
 		hasGenres = checkGenres();
@@ -46,31 +58,76 @@ public abstract class Playlist{
 		return msg;
 	}
 	
+	/**
+	*This method will add the rate in a public playlist.<br>
+	*<b>pre: </b> the method must be override and implemented in other class. <br>
+	*<b>post </b>  when the method get override it will add a rate to a public playlist. <br>
+	*@param rate, this double will save the new rate to add. <br>
+	*@return void <br>
+	*/
 	public void addRate(double rate){
 		;
 	}
 	
+	/**
+	*This method will get the rate of the playlist. <br>
+	*<b> pre: </b> the playlist must be initializated. <br>
+	*<b> post: </b>the user will get the rate of the playlist. <br>
+	*@return double, this methods returns the rate of the playlist.<br>
+	*/
 	public double getRate(){
 		double rate = 0;
 		return rate;
 	}
 	
+	/**
+	*This method will set a different name to the playlist. <br>
+	*<b> pre: </b> the playlist must be initializated. <br>
+	*<b> post: </b>the playlist will change it's name. <br>
+	*@param newName, this Strings saves the new name of the playlist. <br>
+	*@return void<br>
+	*/
 	public void setName(String newName){
 		this.name = newName;
 	}
 	
+	/**
+	*This method will get the name of the playlist. <br>
+	*<b> pre: </b> the playlist must be initializated. <br>
+	*<b> post: </b>the user will get the name of the playlist. <br>
+	*@return String, this methods returns the name of the playlist.<br>
+	*/
 	public String getName(){
 		return name;
 	}
 	
+	/**
+	*This method will set a different duration to the playlist. <br>
+	*<b> pre: </b> the playlist must be initializated. <br>
+	*<b> post: </b>the playlist will change it's duration. <br>
+	*@param newDuration, this int saves the new duration of the playlist. <br>
+	*@return void<br>
+	*/
 	public void setDuration(int newDuration){
 		this.durationInSeconds = newDuration;
 	}
 	
+	/**
+	*This method will get the duration of the playlist in seconds. <br>
+	*<b> pre: </b> the playlist must be initializated. <br>
+	*<b> post: </b>the user will get the duration of the playlist in seconds. <br>
+	*@return int, this methods returns the duration of the playlist in seconds.<br>
+	*/
 	public int getDuration(){
 		return durationInSeconds;
 	}
 	
+	/**
+	*This method calculates the duration of the playlist. <br>
+	*<b> pre: </b> the playlist must be initializated.<br>
+	*<b> post: </b> the user will know the duration of the playlist. <br>
+	*@return String, this method returns the duration of the playlist with the formar minutes:seconds .<br>
+	*/
 	public String calculateDuration(){
 		String playlistDuration = "";
 		boolean space = false;
@@ -107,6 +164,12 @@ public abstract class Playlist{
 		return playlistDuration;
 	}
 	
+	/**
+	*This method check the genres in the playlist. <br>
+	*<b> pre: </b>the playlist must be initializated.<br>
+	*<b> post: </b>the user will know the differents genres in the playlist. <br>
+	*@return Genres[], this method returns an array of the class Genre, with the differents genres that are in the playlist.<br>
+	*/
 	public Genres [] checkGenres(){
 		boolean space = false;
 		Genres [] hasGenres = new Genres[MAXIMUM_GENRES];
@@ -137,6 +200,13 @@ public abstract class Playlist{
 		return hasGenres;
 	}
 	
+	/**
+	*This method add a song to the playlist. <br>
+	*<b> pre: </b>the playlist must be initializated before, and the song too. <br>
+	*<b> post: </b> the user will know if the song was added, and the method will save it.<br>
+	*@param songToAdd, this object will be added to the array with all the songs.<br>
+	*@return String, this method returns a message to let the user know if the song was added. <br>
+	*/
 	public String addSong(Song songToAdd){
 		
 		boolean space = false;
@@ -162,6 +232,13 @@ public abstract class Playlist{
 		return msg;
 	}
 	
+	/**
+	*This method adds an owner user to the playlist. Will be override in the restricted and private playlist. <br>
+	*<b> pre: </b>the playlist must be initializated and the user too. <br>
+	*<b> post: </b> the method doesn't do anything yet. It will be override to let the user know if the owner user was added or not.<br>
+	*@param newOwner, this object will be added to an array when the method gets override.<br>
+	*@return String, this method returns an empty String, when it gets override will let the user know if the owner user was added or nor.<br>
+	*/
 	public String addOwnerUser(User newOwner){
 		String msg = "";
 		return msg;
