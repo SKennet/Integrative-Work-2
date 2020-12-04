@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ui","l":"Main"},{"p":"ui","l":"Menu"},{"p":"model","l":"Playlist"},{"p":"model","l":"PrivatePlaylist"},{"p":"model","l":"PublicPlaylist"},{"p":"model","l":"RestrictedPlaylist"},{"p":"model","l":"Server"},{"p":"model","l":"Song"},{"p":"model","l":"User"}]

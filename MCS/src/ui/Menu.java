@@ -25,6 +25,12 @@ public class Menu{
 	//This it's the server with the arrays. It stores all the users, songs, and playlists.
 	Server newServer = new Server();
 	
+	/**
+	*This method it's a menu, so the user can use all the other classes and methods. <br>
+	*<b>pre:</b> the package model must be imported in the class that it's going to use the menu.<br>
+	*<b>post:</b> the user it's going to be able to use the program from the console.
+	*@return void. <br>
+	*/
 	public Menu(){
 		
 		System.out.println("¡Bienvenido/a a MCS!");
@@ -163,6 +169,12 @@ public class Menu{
 		
 	}
 	
+	/**
+	*This method saves the logo of the server/application.<br>
+	*<b>pre:</b> the menu must be inicializated. <br>
+	*<b>post:</b> the user will see the logo of the application.<br>
+	*@return String, this method returns a String with the logo of the server. <br>
+	*/
 	public String showLogo(){
 		String msg = "";
 		
